@@ -10,21 +10,21 @@ VALUES
 
 INSERT INTO roles (title, salary, department_id)
 VALUES
-    ("Miner", 10, 1),
+    ("Miner", 10.5, 1),
     ("Carpenter", 10, 2),
     ("Woodcutter", 8, 2),
     ("Engraver", 12, 3),
     ("Mason", 11, 3),
     ("Brewer", 11, 4),
     ("Cook", 10, 4),
-    ("Grower", 8, 4),
-    ("Herbalist", 6, 4),
+    ("Grower", 8.5, 4),
+    ("Herbalist", 6.75, 4),
     ("Gem Cutter", 13, 5),
     ("Bone Carver", 10, 5),
-    ("Stone Crafter", 10, 5),
+    ("Stone Crafter", 10.5, 5),
     ("Building Designer", 12, 6),
-    ("Mayor", 14, 6),
-    ("Archer", 10, 7),
+    ("Mayor", 14.75, 6),
+    ("Archer", 10.2, 7),
     ("Hammerdwarf", 11, 7);
 
 
