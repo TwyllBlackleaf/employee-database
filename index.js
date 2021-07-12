@@ -49,7 +49,19 @@ const askEmployee = function() {
         .catch(err => {
             console.log(err);
             askWhatDo();
+        });
+}
+
+const updateRole = function() {
+    inquirer.prompt(questions.updateRole)
+        .then(answers => {
+            console.log(answers.changedEmployee + " " + answers.newRole);
+            askWhatDo();
         })
+        .catch(err => {
+            console.log(err);
+            askWhatDo();
+        });
 }
 
 const askWhatDo = function() {
@@ -68,7 +80,7 @@ const askWhatDo = function() {
             } else if (whatDo === "Add an employee") {
                 askEmployee();
             } else if (whatDo === "Update an employee role") {
-
+                updateRole();
             } else {
                 console.log("Error: need to choose an available option");
                 askWhatDo();
@@ -85,15 +97,3 @@ const init = function() {
 }
 
 init();
-
-/* db.query(sqlQueries.employees, (err, rows) => {
-    if (err) {
-        console.log(err);
-        return;
-    }
-    console.log(rows);
-
-    rows.forEach(row => {
-        console.log(row.id);
-    });
-}) */

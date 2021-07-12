@@ -133,8 +133,22 @@ const questions = {
         {
             type: "list",
             name: "employeeManager",
-            message: "Please choose the new employee's manager. (Press Enter if no manager.)",
+            message: "Please choose the new employee's manager. (Leave blank if no manager.)",
             choices: getEmployees(sqlQueries.inqEmployees)
+        }
+    ],
+    updateRole: [
+        {
+            type: "list",
+            name: "changedEmployee",
+            message: "Please choose an employee to update.",
+            choices: getEmployees(sqlQueries.inqEmployees)
+        },
+        {
+            type: "list",
+            name: "newRole",
+            message: "Please choose the employee's new role.",
+            choices: getRoleChoices(sqlQueries.inqRoles)
         }
     ]
 }
