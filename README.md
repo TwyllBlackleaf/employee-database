@@ -26,6 +26,7 @@ For further detail, see the how-to video at this link: <https://drive.google.com
 
 - Selecting "0: None" for a new employee's manager causes an error.
 - In order to select a newly created role using the Inquirer prompts for creating a new employee or updating an employee's role, you will need to quit the program using ^C and reopen it by running `node index` again before Inquirer will see the new data.
+- The walkthrough video references "plump turnips" instead of "plump helmets".
 
 ## About the Author
 
