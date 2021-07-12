@@ -9,7 +9,7 @@ const showTable = function(sql) {
     db.query(sql, (err, rows) => {
         if (err) {
             console.log(err);
-            return;
+            askWhatDo();
         }
         console.table(rows);
         askWhatDo();
