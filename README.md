@@ -20,6 +20,8 @@ The first time you use the database, run `source ./db/schema.sql` and `source ./
 
 Start the program using `node index` or `npm start` in the command line.
 
+For further detail, see the how-to video at this link: <https://drive.google.com/file/d/1FkEQ-MnzEKEvSHL2e8BwCgMLP4HD_4r4/view>
+
 ## Known Issues
 
 - Selecting "0: None" for a new employee's manager causes an error.
