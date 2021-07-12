@@ -5,45 +5,66 @@ const db = require("./db/connection");
 const sqlQueries = require("./utils/sqlQueries");
 const questions = require("./utils/questions");
 
+const showTable = function(sql) {
+    db.query(sql, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.table(rows);
+        askWhatDo();
+    });
+}
+
+const askDepartment = function() {
+    inquirer.prompt(questions.department)
+        .then(({ departmentName }) => {
+            console.log(departmentName);
+            askWhatDo();
+        })
+        .catch(err => {
+            console.log(err);
+            askWhatDo();
+        });
+}
+
+const askRole = function() {
+    inquirer.prompt(questions.role)
+        .then(answers => {
+            console.log(answers.roleName + " " + answers.roleSalary);
+            askWhatDo();
+        })
+        .catch(err => {
+            console.log(err);
+            askWhatDo();
+        });
+}
+
 const askWhatDo = function() {
     inquirer.prompt(questions.whatDo)
         .then(({ whatDo }) => {
             if (whatDo === "View all departments") {
-                db.query(sqlQueries.departments, (err, rows) => {
-                    if (err) {
-                        console.log(err);
-                        return;
-                    }
-                    console.log(rows);
-                });
+                showTable(sqlQueries.departments);
             } else if (whatDo === "View all roles") {
-                db.query(sqlQueries.roles, (err, rows) => {
-                    if (err) {
-                        console.log(err);
-                        return;
-                    }
-                    console.log(rows);
-                });
+                showTable(sqlQueries.roles);
             } else if (whatDo === "View all employees") {
-                db.query(sqlQueries.employees, (err, rows) => {
-                    if (err) {
-                        console.log(err);
-                        return;
-                    }
-                    console.log(rows);
-                });
+                showTable(sqlQueries.employees);
             } else if (whatDo === "Add a department") {
-
+                askDepartment();
             } else if (whatDo === "Add a role") {
-                
+                askRole();
             } else if (whatDo === "Add an employee") {
 
             } else if (whatDo === "Update an employee role") {
 
             } else {
-                console.log("Error: need to choose an option");
-                return;
+                console.log("Error: need to choose an available option");
+                askWhatDo();
             }
+        })
+        .catch(err => {
+            console.log(err);
+            askWhatDo();
         });
 }
 

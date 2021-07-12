@@ -1,5 +1,6 @@
 const addToDB = {
     // Add a department: name
+    
 
     // Add a role: name, salary, department
 
