@@ -10,12 +10,28 @@ const getRoleChoices = function(sql) {
             console.log(err);
             return;
         }
-        rows.forEach(({ title }) => {
-            rolesList.push(title);
+        rows.forEach((row) => {
+            rolesList.push(row.id + ": " + row.title);
         });
     });
 
-    return (rolesList);
+    return rolesList;
+}
+
+const getDepartments = function(sql) {
+    var departmentsList = [];
+
+    db.query(sql, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        rows.forEach((row) => {
+            departmentsList.push(row.id + ": " + row.name);
+        });
+    });
+
+    return departmentsList;
 }
 
 const getEmployees = function(sql) {
@@ -26,12 +42,18 @@ const getEmployees = function(sql) {
             console.log(err);
             return;
         }
-        rows.forEach(({ full_name }) => {
-            employeeList.push(full_name);
+        rows.forEach((row) => {
+            employeeList.push(row.id + ": " + row.full_name);
         })
     })
 
     return employeeList;
+}
+
+const getManagers = function(sql) {
+    var managersList = getEmployees(sql);
+    managersList.push("0: None");
+    return managersList;
 }
 
 
@@ -94,7 +116,7 @@ const questions = {
             type: "list",
             name: "roleDepartment",
             message: "Please choose what department the role falls under.",
-            choices: getRoleChoices(sqlQueries.inqRoles)
+            choices: getDepartments(sqlQueries.inqDepartments)
         }
     ],
     newEmployee: [
@@ -133,8 +155,8 @@ const questions = {
         {
             type: "list",
             name: "employeeManager",
-            message: "Please choose the new employee's manager. (Leave blank if no manager.)",
-            choices: getEmployees(sqlQueries.inqEmployees)
+            message: "Please choose the new employee's manager.",
+            choices: getManagers(sqlQueries.inqEmployees)
         }
     ],
     updateRole: [

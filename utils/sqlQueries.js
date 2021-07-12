@@ -25,7 +25,7 @@ const sqlQueries = {
     inqRoles: `SELECT id, title FROM roles`,
 
     // Get all managers for inquirer
-    inqManagers: `SELECT m.id, CONCAT(m.first_name, " ", m.last_name)
+    inqManagers: `SELECT m.id, CONCAT(m.first_name, " ", m.last_name) AS full_name
     FROM employees e
     INNER JOIN employees m
     ON e.manager_id = m.id`,
@@ -34,7 +34,7 @@ const sqlQueries = {
     inqDepartments: `SELECT * FROM departments`,
 
     // Get all employees for inquirer
-    inqEmployees: `SELECT CONCAT(first_name, " ", last_name) AS full_name FROM employees`
+    inqEmployees: `SELECT id, CONCAT(first_name, " ", last_name) AS full_name FROM employees`
 }
 
 module.exports = sqlQueries;
