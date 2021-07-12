@@ -2,9 +2,6 @@ const sqlQueries = require("./sqlQueries");
 const db = require("../db/connection");
 const { roles } = require("./sqlQueries");
 
-var rolesOptions = [];
-
-
 const getRoleChoices = function(sql) {
     var rolesList = [];
 
@@ -13,9 +10,7 @@ const getRoleChoices = function(sql) {
             console.log(err);
             return;
         }
-        rolesOptions = rows;
-        
-        rolesOptions.forEach(({ title }) => {
+        rows.forEach(({ title }) => {
             rolesList.push(title);
         });
     });
@@ -23,7 +18,22 @@ const getRoleChoices = function(sql) {
     return (rolesList);
 }
 
-const get
+const getEmployees = function(sql) {
+    var employeeList = [];
+
+    db.query(sql, (err, rows) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        rows.forEach(({ full_name }) => {
+            employeeList.push(full_name);
+        })
+    })
+
+    return employeeList;
+}
+
 
 const questions = {
     whatDo: {
@@ -85,6 +95,46 @@ const questions = {
             name: "roleDepartment",
             message: "Please choose what department the role falls under.",
             choices: getRoleChoices(sqlQueries.inqRoles)
+        }
+    ],
+    newEmployee: [
+        {
+            type: "input",
+            name: "firstName",
+            message: "Please enter the new employee's first name.",
+            validate: firstNameInput => {
+                if (firstNameInput) {
+                    return true;
+                } else {
+                    console.log("New employee's first name is required.");
+                    return false;
+                }
+            }
+        },
+        {
+            type: "input",
+            name: "lastName",
+            message: "Please enter the new employee's last name.",
+            validate: lastNameInput => {
+                if (lastNameInput) {
+                    return true;
+                } else {
+                    console.log("New employee's last name is required.");
+                    return false;
+                }
+            }
+        },
+        {
+            type: "list",
+            name: "employeeRole",
+            message: "Please choose the new employee's role.",
+            choices: getRoleChoices(sqlQueries.inqRoles)
+        },
+        {
+            type: "list",
+            name: "employeeManager",
+            message: "Please choose the new employee's manager. (Press Enter if no manager.)",
+            choices: getEmployees(sqlQueries.inqEmployees)
         }
     ]
 }

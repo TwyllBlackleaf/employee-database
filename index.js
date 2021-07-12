@@ -40,6 +40,18 @@ const askRole = function() {
         });
 }
 
+const askEmployee = function() {
+    inquirer.prompt(questions.newEmployee)
+        .then(answers => {
+            console.log(answers.firstName + " " + answers.lastName + " " + answers.employeeRole + " " + answers.employeeManager);
+            askWhatDo();
+        })
+        .catch(err => {
+            console.log(err);
+            askWhatDo();
+        })
+}
+
 const askWhatDo = function() {
     inquirer.prompt(questions.whatDo)
         .then(({ whatDo }) => {
@@ -54,7 +66,7 @@ const askWhatDo = function() {
             } else if (whatDo === "Add a role") {
                 askRole();
             } else if (whatDo === "Add an employee") {
-
+                askEmployee();
             } else if (whatDo === "Update an employee role") {
 
             } else {

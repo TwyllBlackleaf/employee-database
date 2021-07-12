@@ -34,7 +34,7 @@ const sqlQueries = {
     inqDepartments: `SELECT * FROM departments`,
 
     // Get all employees for inquirer
-    inqEmployees: `SELECT id, CONCAT(first_name, " ", last_name) FROM employees`
+    inqEmployees: `SELECT CONCAT(first_name, " ", last_name) AS full_name FROM employees`
 }
 
 module.exports = sqlQueries;
